@@ -1,7 +1,7 @@
 #ifndef DATE_H_
 #define DATE_H_
 
-#define MAX_DATE 10
+#define MAX_DATE 11
 #define MAX_DAY 2
 #define MAX_MONTH 2
 #define MAX_YEAR 4

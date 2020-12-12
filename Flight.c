@@ -7,35 +7,45 @@
 
 void initFlightAirports(Flight* flight, AirportManager* airportManager)
 {
-	int ok=0;
+	int notOk=0;
+	int okIATAorigin=0;
+	int okIATAdest=0;
 	char originIATA[IATA_CODE];
 	char destenationIATA[IATA_CODE];
-	Airport* origin;
-	Airport* destenation;
+
 	do {
-		printf("please enter the IATA of origin airport\n");
-		scanf("%s",originIATA);
-		origin= findAirport(originIATA, airportManager);
 
-		printf("please enter the IATA of destination airport\n");
-		printf("Make sure it is not the same airport as origin\n");
-		scanf("%s",destenationIATA);
-		destenation= findAirport(destenationIATA, airportManager);
+		do{
+			printf("please enter the IATA of origin airport\n");
+			scanf("%s",originIATA);
+			okIATAorigin=checkIATA(originIATA);
+		}while(!okIATAorigin);
+		flight->origin= findAirport(originIATA, airportManager);
 
-		if(origin!= NULL && destenation!=NULL)
+		do{
+			printf("please enter the IATA of destination airport\n");
+			printf("Make sure it is not the same airport as origin\n");
+			scanf("%s",destenationIATA);
+			okIATAdest=checkIATA(destenationIATA);
+		}while(!okIATAdest);
+		flight->destination= findAirport(destenationIATA, airportManager);
+
+		if(flight->origin!= NULL && flight->destination!=NULL)
 		{
-			ok= isAirportsSame(origin, destenation);
-			if(!ok)
+			notOk= isAirportsSame(flight->origin, flight->destination);
+			if(notOk)
 			{
 				printf("Sama airport. try again\n");
 			}
 		}
 		else
+		{
 			printf("This airports can not be found. make sure IATA is correct and try again.\n");
+			notOk=1;
+		}
+
 	}
-	while(!ok);
-	flight->destination=destenation;
-	flight->origin=origin;
+	while(notOk);
 }
 
 void initTakeOffTime(Flight* flight)
@@ -63,12 +73,13 @@ int initFlight(Flight* flight, AirportManager* airportManager)
 
 void printFlight(const Flight* flight)
 {
-	printf("Flight taking off at %d",flight->time);
+	printf("Flight taking off at %d ",flight->time);
 	printDate(&flight->date);
-	printf(" from");
+	printf("from ");
 	printAirport(flight->origin);
-	printf(" to");
+	printf("to ");
 	printAirport(flight->destination);
+	printf("\n");
 }
 
 void freeFlight(Flight* flight)

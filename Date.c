@@ -8,7 +8,7 @@
 
 int checkDateFormat(char* date)
 {
-	for (int i = 0; i <10 ; ++i)
+	for (int i = 0; i <MAX_DATE-1 ; ++i)
 	{
 		if((i==2 && *date!='/' )|| (i==5 && *date!='/' ))
 		{
@@ -92,8 +92,9 @@ int checkDateNumbers(char* dateStr, int* day, int* month, int* year)
 
 int checkDayMonth(int* day,int* month)
 {
-	*month-=1;
-	switch (*month) {
+	int tempMonth=*month;
+	tempMonth-=1;
+	switch (tempMonth) {
 		case eJanuary:
 			if(*day>31)
 				return 0;
@@ -150,7 +151,8 @@ void initDate(Date* date)
 {
 	int okStracture=0;
 	int okNumbers=0;
-	int okdayToMonth;
+	int okdayToMonth=0;
+	int time=1;
 
 	char tempDate[MAX_DATE];
 	int day;
@@ -158,11 +160,29 @@ void initDate(Date* date)
 	int year;
 
 	do{
-	printf("enter flight date in format dd/mm/yyyy");
-	myGets(tempDate, MAX_DATE);
-	okStracture=checkDateFormat(tempDate);
-	okNumbers=checkDateNumbers(tempDate, &day,&month,&year);
-	okdayToMonth=checkDayMonth(&day,&month);
+		printf("enter flight date in format dd/mm/yyyy\n");
+
+		if(time==1)
+		{
+			getchar(); //whitespace
+			time++;
+		}
+
+		myGets(tempDate, MAX_DATE);
+
+		if(strlen(tempDate)==10)
+		{
+			okStracture=checkDateFormat(tempDate);
+			getchar(); //whitespace
+			if(okStracture)
+			{
+				okNumbers=checkDateNumbers(tempDate, &day,&month,&year);
+				if(okNumbers)
+				{
+					okdayToMonth=checkDayMonth(&day,&month);
+				}
+			}
+		}
 	}
 	while(!okStracture || !okNumbers || !okdayToMonth);
 

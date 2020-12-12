@@ -33,6 +33,8 @@ void initAirline(Airline* airline)
 	airline->numOfFlights=0;
 }
 
+
+
 void printAirline(const Airline* airline)
 {
 	printf("Airline: name= %s has %d flights\n" ,airline->name , airline->numOfFlights);
@@ -42,6 +44,7 @@ void printAirline(const Airline* airline)
 		for (int i = 0; i < airline->numOfFlights; i++)
 			printFlight(airline->allFlights[i]);
 	}
+	printf("\n");
 }
 
 void freeAirline(Airline* airline)
@@ -75,7 +78,13 @@ int addFlight(Flight* flight, Airline* airline)
 
 int howManyFlightsInLineToAirline(Airline* airline, char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE])
 {
-	int counter=howManyFlightsInTheLine(airline->allFlights, IATAOrigin, IATADestenation);
-	return counter;
+	if(airline->numOfFlights==0)
+		return 0;
+	else
+	{
+		int counter=howManyFlightsInTheLine(airline->allFlights, IATAOrigin, IATADestenation);
+		return counter;
+	}
+
 }
 

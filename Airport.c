@@ -25,6 +25,8 @@ void initAirportIATA(Airport* airport)
 		printf("Make sure it is ONLY 3 letters and UPPER CASE \n");
 		scanf("%s", temp);
 		ok=checkIATA(temp);
+		if(!ok)
+			printf("Wrong input, try again\n");
 	}
 	while(!ok);
 	strcpy(airport->IATA,temp);
@@ -33,6 +35,9 @@ void initAirportIATA(Airport* airport)
 
 int initAirport(Airport* airport)
 {
+	airport->name= (char*)malloc(MAX_NAME*sizeof(char));
+	airport->country= (char*)malloc(MAX_NAME*sizeof(char));
+
 	getchar(); //there is a white space in buffer
 
 	initAirportName(airport);
@@ -47,6 +52,12 @@ int initAirport(Airport* airport)
 void printAirport(const Airport* airport)
 {
 	printf("Airport: %s ,IATA: %s ,country: %s \n", airport->name, airport->IATA, airport->country);
+}
+
+void freeAirport(Airport* airport)
+{
+	free(airport->name);
+	free(airport->country);
 }
 
 int isAirportsSame(const Airport* airport1, const Airport* airport2)

@@ -16,7 +16,7 @@ void initAirportName(Airport* airport);
 void initAirportIATA(Airport* airport);
 int initAirport(Airport* airport);
 void printAirport(const Airport* airport);
-//void freeAirport(Airport* airport);
+void freeAirport(Airport* airport);
 
 
 //extra:

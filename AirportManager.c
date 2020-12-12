@@ -9,8 +9,6 @@ int initAllAirports(AirportManager* airportManager)
 	airportManager->allAirports= (Airport*)malloc(airportManager->numOfAitports*sizeof(Airport));
 	for(int i=0; i<airportManager->numOfAitports; i++)
 	{
-		airportManager->allAirports[i].name= (char*)malloc(MAX_NAME*sizeof(char));
-		airportManager->allAirports[i].country= (char*)malloc(MAX_NAME*sizeof(char));
 		initAirport(&airportManager->allAirports[i]);
 	}
 	return 0;
@@ -32,14 +30,14 @@ void printAirportManager(const AirportManager* airportManager)
 		for(int i=0; i<airportManager->numOfAitports; i++)
 			printAirport(&airportManager->allAirports[i]);
 	}
+	printf("\n");
 }
 
 void freeAirportManager(AirportManager* airportManager)
 {
 	for(int i=0; i<airportManager->numOfAitports; i++)
 	{
-		free(airportManager->allAirports[i].name);
-		free(airportManager->allAirports[i].country);
+		freeAirport(&airportManager->allAirports[i]);
 	}
 	free(airportManager->allAirports);
 }
@@ -48,7 +46,7 @@ int addAirport(Airport* airport, AirportManager* airportManager)
 {
 	airportManager->numOfAitports++;
 	airportManager->allAirports = (Airport*)realloc(airportManager->allAirports, airportManager->numOfAitports*sizeof(Airport));
-	//initAirport(&airportManager->allAirports[(airportManager->numOfAitports)-1]);
+
 	if(airportManager->allAirports!=NULL)
 	{
 		airportManager->allAirports[(airportManager->numOfAitports)-1]=*airport;

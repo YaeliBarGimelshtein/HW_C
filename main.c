@@ -5,7 +5,7 @@
 
 void printMenu()
 {
-	printf("Please choose on of the following options:\n");
+	printf("Please choose one of the following options:\n");
 	printf("press 1 to add a flight to the airline \n");
 	printf("press 2 to add an airport the the airport manager \n");
 	printf("press 3 to print details of airline \n");
@@ -23,7 +23,7 @@ int main()
 
 	Airline elal;
 	initAirline(&elal);
-
+	printf("airport manager and airline added succesfully\n");
 	int choise=0;
 	int ok1;
 	int ok2;
@@ -32,11 +32,11 @@ int main()
 		scanf("%d", &choise);
 		switch (choise) {
 			case 1:
-				ok1=addFlightToAirlinr(&elal, &rashut);
+				ok1=addFlightToAirline(&elal, &rashut);
 				if(!ok1)
 					printf("Can't add this flight , out of memory\n");
 				else
-					printf("Airport added successfully\n");
+					printf("flight added successfully\n");
 				break;
 			case 2:
 				ok2=addAirportToAirportManager(&rashut);

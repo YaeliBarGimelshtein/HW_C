@@ -10,11 +10,12 @@
 #include "Utils.h"
 
 
-int addFlightToAirlinr(Airline* airline, AirportManager* airportManager)
+int addFlightToAirline(Airline* airline, AirportManager* airportManager)
 {
-	Flight flight;
-	initFlight(&flight, airportManager);
-	int ok=addFlight(&flight, airline);
+	Flight* flight;
+	flight= (Flight*)malloc(1*sizeof(flight));
+	initFlight(flight, airportManager);
+	int ok=addFlight(flight, airline);
 	return ok;
 }
 int addAirportToAirportManager(AirportManager* airportManager)
@@ -46,11 +47,13 @@ void printFlightsOfAirlineBetweenAirports(Airline* airline)
 	char* IATAorigin;
 	char* IATAdestination;
 	int counter=0;
+	IATAorigin= (char*)malloc(IATA_CODE*sizeof(char));
+	IATAdestination= (char*)malloc(IATA_CODE*sizeof(char));
 
 	initIATA(&IATAorigin, &IATAdestination);
 
 	counter=howManyFlightsInLineToAirline(airline, IATAorigin, IATAdestination);
-	printf("There are %d  flights in same line to the airline",counter);
+	printf("There are %d  flights in same line to the airline\n",counter);
 }
 void freeAllMemory(AirportManager* airportManager, Airline* airline)
 {
