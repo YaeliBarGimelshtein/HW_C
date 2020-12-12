@@ -9,6 +9,7 @@ int initAllAirports(AirportManager* airportManager)
 	airportManager->allAirports= (Airport*)malloc(airportManager->numOfAitports*sizeof(Airport));
 	for(int i=0; i<airportManager->numOfAitports; i++)
 	{
+		printf("Airport %d\n",i+1);
 		initAirport(&airportManager->allAirports[i]);
 	}
 	return 0;
