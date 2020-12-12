@@ -4,6 +4,7 @@
 #include "Airport.h"
 #include "Utils.h"
 #include "Date.h"
+#include "AirportManager.h"
 
 void initFlightAirports(Flight* flight, AirportManager* airportManager)
 {

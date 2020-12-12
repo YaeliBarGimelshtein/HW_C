@@ -18,6 +18,7 @@ int addFlightToAirline(Airline* airline, AirportManager* airportManager)
 	int ok=addFlight(flight, airline);
 	return ok;
 }
+
 int addAirportToAirportManager(AirportManager* airportManager, Airline* airline)
 {
 	Airport* temp;
@@ -27,9 +28,13 @@ int addAirportToAirportManager(AirportManager* airportManager, Airline* airline)
 		if(isAirportsSame(temp, &(airportManager->allAirports[i]))==1)
 			return 0;
 	}
-	int ok=addAirport(temp, airportManager , airline);
+	int ok=addAirport(temp, airportManager);
 	if(ok)
+	{
+		updatePointerstoAirline(airportManager,airline);
 		return 1;
+	}
+
 	else
 		return -1;
 

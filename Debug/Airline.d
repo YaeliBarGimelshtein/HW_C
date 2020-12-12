@@ -1,5 +1,5 @@
-Airline.o: ../Airline.c ../Airline.h ../Flight.h ../Airport.h \
- ../AirportManager.h ../Date.h ../Utils.h
+Airline.o: ../Airline.c ../Airline.h ../Flight.h ../Airport.h ../Date.h \
+ ../AirportManager.h ../Utils.h
 
 ../Airline.h:
 
@@ -7,8 +7,8 @@ Airline.o: ../Airline.c ../Airline.h ../Flight.h ../Airport.h \
 
 ../Airport.h:
 
-../AirportManager.h:
-
 ../Date.h:
+
+../AirportManager.h:
 
 ../Utils.h:

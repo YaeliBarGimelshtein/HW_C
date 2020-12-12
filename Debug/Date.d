@@ -1,5 +1,5 @@
-Date.o: ../Date.c ../Utils.h ../Airport.h ../Flight.h ../AirportManager.h \
- ../Date.h
+Date.o: ../Date.c ../Utils.h ../Airport.h ../Flight.h ../Date.h \
+ ../AirportManager.h
 
 ../Utils.h:
 
@@ -7,6 +7,6 @@ Date.o: ../Date.c ../Utils.h ../Airport.h ../Flight.h ../AirportManager.h \
 
 ../Flight.h:
 
-../AirportManager.h:
-
 ../Date.h:
+
+../AirportManager.h:

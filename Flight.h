@@ -2,8 +2,8 @@
 #define FLIGHT_H_
 
 #include "Airport.h"
-#include "AirportManager.h"
 #include "Date.h"
+#include "AirportManager.h"
 
 typedef struct
 {

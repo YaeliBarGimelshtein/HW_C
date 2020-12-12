@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "menuMethods.h"
 #include "AirportManager.h"
 #include "Airline.h"
@@ -18,12 +19,16 @@ void printMenu()
 int main()
 {
 	printf("Hello and welcome to the flights program\n");
-	AirportManager rashut;
-	initAirportManager(&rashut);
+	printf("We start by entering Airport Manager and Airline.\n");
+	AirportManager* rashut;
+	rashut= (AirportManager*)malloc(1*sizeof(AirportManager));
+	initAirportManager(rashut);
 
-	Airline elal;
-	initAirline(&elal);
+	Airline* airlineCompany;
+	airlineCompany= (Airline*)malloc(1*sizeof(Airline));
+	initAirline(airlineCompany);
 	printf("airport manager and airline added succesfully\n");
+
 	int choise=0;
 	int ok1;
 	int ok2;
@@ -32,14 +37,14 @@ int main()
 		scanf("%d", &choise);
 		switch (choise) {
 			case 1:
-				ok1=addFlightToAirline(&elal, &rashut);
+				ok1=addFlightToAirline(airlineCompany, rashut);
 				if(!ok1)
 					printf("Can't add this flight , out of memory\n");
 				else
 					printf("flight added successfully\n");
 				break;
 			case 2:
-				ok2=addAirportToAirportManager(&rashut,&elal);
+				ok2=addAirportToAirportManager(rashut,airlineCompany);
 				if(ok2==0)
 					printf("Can't add this airport since it already exists\n");
 				else if(ok2==-1)
@@ -48,17 +53,17 @@ int main()
 					printf("Airport added successfully\n");
 				break;
 			case 3:
-				printAirlineDetalis(&elal);
+				printAirlineDetalis(airlineCompany);
 				break;
 			case 4:
-				printAirportManagerDetails(&rashut);
+				printAirportManagerDetails(rashut);
 				break;
 			case 5:
-				printFlightsOfAirlineBetweenAirports(&elal);
+				printFlightsOfAirlineBetweenAirports(airlineCompany);
 				break;
 			case 6:
 				printf("You chise to exit. Have a good day, bye! \n");
-				freeAllMemory(&rashut, &elal);
+				freeAllMemory(rashut, airlineCompany);
 				break;
 			default:
 				printf("pressed a wrong key. Try again.\n");

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "AirportManager.h"
 #include "Airport.h"
+#include "Airline.h"
 
 int initAllAirports(AirportManager* airportManager)
 {
@@ -43,7 +44,7 @@ void freeAirportManager(AirportManager* airportManager)
 	free(airportManager->allAirports);
 }
 
-int addAirport(Airport* airport, AirportManager* airportManager, Airline* airline)
+int addAirport(Airport* airport, AirportManager* airportManager)
 {
 	airportManager->numOfAitports++;
 	airportManager->allAirports = (Airport*)realloc(airportManager->allAirports, airportManager->numOfAitports*sizeof(Airport));
@@ -51,7 +52,6 @@ int addAirport(Airport* airport, AirportManager* airportManager, Airline* airlin
 	if(airportManager->allAirports!=NULL)
 	{
 		airportManager->allAirports[(airportManager->numOfAitports)-1]=*airport;
-		//???
 		return 1;
 	}
 	return 0;
