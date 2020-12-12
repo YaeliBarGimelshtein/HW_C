@@ -9,8 +9,8 @@ typedef struct
 	char* name;
 	int numOfFlights;
 	Flight** allFlights;
-	char** IATAforFlights;
-	int numOfIATAforFlights;
+	//char** IATAforFlights;
+	//int numOfIATAforFlights;
 } Airline;
 
 //must:

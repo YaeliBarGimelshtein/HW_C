@@ -8,7 +8,7 @@ typedef struct
 {
 	char* name;
 	char* country;
-	char IATA[IATA_CODE];
+	char* IATA;
 } Airport;
 
 //musts:
@@ -22,6 +22,6 @@ void freeAirport(Airport* airport);
 //extra:
 int isAirportsSame(const Airport* airport1,const Airport* airport2);
 int isIataSameToAirport(const Airport* airport, char IATA[IATA_CODE]);
-void initIATA(char** IATAorigin, char** IATAdestination);
+void initIATA(char* IATAorigin, char* IATAdestination);
 
 #endif

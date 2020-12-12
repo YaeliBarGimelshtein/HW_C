@@ -42,6 +42,7 @@ void freeAirportManager(AirportManager* airportManager)
 		freeAirport(&airportManager->allAirports[i]);
 	}
 	free(airportManager->allAirports);
+	free(airportManager);
 }
 
 int addAirport(Airport* airport, AirportManager* airportManager)

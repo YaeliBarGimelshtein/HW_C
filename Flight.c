@@ -8,45 +8,14 @@
 
 void initFlightAirports(Flight* flight, AirportManager* airportManager)
 {
-	int notOk=0;
-	int okIATAorigin=0;
-	int okIATAdest=0;
-	char originIATA[IATA_CODE];
-	char destenationIATA[IATA_CODE];
-
-	do {
-
-		do{
-			printf("please enter the IATA of origin airport\n");
-			scanf("%s",originIATA);
-			okIATAorigin=checkIATA(originIATA);
-		}while(!okIATAorigin);
-		flight->origin= findAirport(originIATA, airportManager);
-
-		do{
-			printf("please enter the IATA of destination airport\n");
-			printf("Make sure it is not the same airport as origin\n");
-			scanf("%s",destenationIATA);
-			okIATAdest=checkIATA(destenationIATA);
-		}while(!okIATAdest);
-		flight->destination= findAirport(destenationIATA, airportManager);
-
-		if(flight->origin!= NULL && flight->destination!=NULL)
-		{
-			notOk= isAirportsSame(flight->origin, flight->destination);
-			if(notOk)
-			{
-				printf("Sama airport. try again\n");
-			}
-		}
-		else
-		{
-			printf("This airports can not be found. make sure IATA is correct and try again.\n");
-			notOk=1;
-		}
-
+	Airport* temp;
+	Airport* temp2;
+	do{
+		initIATA(flight->IATAorigin, flight->IATAdestination);
+		temp=findAirport(flight->IATAdestination, airportManager);
+		temp2=findAirport(flight->IATAorigin, airportManager);
 	}
-	while(notOk);
+	while(temp==NULL || temp2==NULL);
 }
 
 void initTakeOffTime(Flight* flight)
@@ -66,6 +35,8 @@ void initDateForFlight(Date* date)
 
 int initFlight(Flight* flight, AirportManager* airportManager)
 {
+	flight->IATAorigin= (char*)malloc(IATA_CODE*sizeof(char));
+	flight->IATAdestination= (char*)malloc(IATA_CODE*sizeof(char));
 	initFlightAirports(flight, airportManager);
 	initTakeOffTime(flight);
 	initDateForFlight(&flight->date);
@@ -76,25 +47,25 @@ void printFlight(const Flight* flight)
 {
 	printf("Flight taking off at %d ",flight->time);
 	printDate(&flight->date);
-	printf("from ");
-	printAirport(flight->origin);
-	printf("to ");
-	printAirport(flight->destination);
+	printf("from %s ",flight->IATAorigin);
+	printf("to %s",flight->IATAdestination);
 	printf("\n");
 }
 
 void freeFlight(Flight* flight)
 {
+	free(flight->IATAdestination);
+	free(flight->IATAorigin);
 	free(flight);
 }
 
 int isTheSameFlight(Flight* flight, char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE])
 {
-	if(!(isIataSameToAirport(flight->origin, IATAOrigin)))
+	if(!(checkIATAsame(flight->IATAorigin, IATAOrigin)))
 	{
 		return 0;
 	}
-	if(!(isIataSameToAirport(flight->destination, IATADestenation)))
+	if(!(checkIATAsame(flight->IATAdestination, IATADestenation)))
 	{
 		return 0;
 	}
@@ -114,7 +85,4 @@ int howManyFlightsInTheLine(Flight** flights,char IATAOrigin[IATA_CODE], char IA
 	}
 	return counter;
 }
-
-
-
 

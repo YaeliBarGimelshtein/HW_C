@@ -7,8 +7,8 @@
 
 typedef struct
 {
-	Airport* origin;
-	Airport* destination;
+	char* IATAorigin;
+	char* IATAdestination;
 	int time;
 	Date date;
 } Flight;

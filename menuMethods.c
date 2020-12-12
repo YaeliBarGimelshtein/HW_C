@@ -31,7 +31,6 @@ int addAirportToAirportManager(AirportManager* airportManager, Airline* airline)
 	int ok=addAirport(temp, airportManager);
 	if(ok)
 	{
-		updatePointerstoAirline(airportManager,airline);
 		return 1;
 	}
 
@@ -56,7 +55,7 @@ void printFlightsOfAirlineBetweenAirports(Airline* airline)
 	IATAorigin= (char*)malloc(IATA_CODE*sizeof(char));
 	IATAdestination= (char*)malloc(IATA_CODE*sizeof(char));
 
-	initIATA(&IATAorigin, &IATAdestination);
+	initIATA(IATAorigin, IATAdestination);
 
 	counter=howManyFlightsInLineToAirline(airline, IATAorigin, IATAdestination);
 	printf("There are %d  flights in same line to the airline\n",counter);

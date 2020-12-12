@@ -62,8 +62,8 @@ int main()
 				printFlightsOfAirlineBetweenAirports(airlineCompany);
 				break;
 			case 6:
-				printf("You chise to exit. Have a good day, bye! \n");
 				freeAllMemory(rashut, airlineCompany);
+				printf("You chise to exit. Have a good day, bye! \n");
 				break;
 			default:
 				printf("pressed a wrong key. Try again.\n");
