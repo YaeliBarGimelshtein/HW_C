@@ -43,7 +43,7 @@ void freeAirportManager(AirportManager* airportManager)
 	free(airportManager->allAirports);
 }
 
-int addAirport(Airport* airport, AirportManager* airportManager)
+int addAirport(Airport* airport, AirportManager* airportManager, Airline* airline)
 {
 	airportManager->numOfAitports++;
 	airportManager->allAirports = (Airport*)realloc(airportManager->allAirports, airportManager->numOfAitports*sizeof(Airport));
@@ -51,6 +51,7 @@ int addAirport(Airport* airport, AirportManager* airportManager)
 	if(airportManager->allAirports!=NULL)
 	{
 		airportManager->allAirports[(airportManager->numOfAitports)-1]=*airport;
+		//???
 		return 1;
 	}
 	return 0;

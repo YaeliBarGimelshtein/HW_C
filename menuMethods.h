@@ -5,7 +5,7 @@
 #include "Airline.h"
 
 int addFlightToAirline(Airline* airline,AirportManager* airportManager);
-int addAirportToAirportManager(AirportManager* airportManager);
+int addAirportToAirportManager(AirportManager* airportManager, Airline* airline);
 void printAirlineDetalis(Airline* airline);
 void printAirportManagerDetails(AirportManager* airportManager);
 void printFlightsOfAirlineBetweenAirports(Airline* airline);

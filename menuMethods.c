@@ -18,15 +18,16 @@ int addFlightToAirline(Airline* airline, AirportManager* airportManager)
 	int ok=addFlight(flight, airline);
 	return ok;
 }
-int addAirportToAirportManager(AirportManager* airportManager)
+int addAirportToAirportManager(AirportManager* airportManager, Airline* airline)
 {
-	Airport temp;
-	initAirport(&temp);
+	Airport* temp;
+	temp= (Airport*)malloc(1*sizeof(Airport));
+	initAirport(temp);
 	for (int i = 0; i < airportManager->numOfAitports; ++i) {
-		if(isAirportsSame(&temp, &(airportManager->allAirports[i]))==1)
+		if(isAirportsSame(temp, &(airportManager->allAirports[i]))==1)
 			return 0;
 	}
-	int ok=addAirport(&temp, airportManager);
+	int ok=addAirport(temp, airportManager , airline);
 	if(ok)
 		return 1;
 	else

@@ -16,7 +16,7 @@ void printAirportManager(const AirportManager* airportManager);
 void freeAirportManager(AirportManager* airportManager);
 
 //extra:
-int addAirport(Airport* airport, AirportManager* airportManager);
+int addAirport(Airport* airport, AirportManager* airportManager, Airline* airline);
 Airport* findAirport(char IATA[IATA_CODE], AirportManager* airportManager);
 
 #endif

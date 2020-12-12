@@ -39,7 +39,7 @@ int main()
 					printf("flight added successfully\n");
 				break;
 			case 2:
-				ok2=addAirportToAirportManager(&rashut);
+				ok2=addAirportToAirportManager(&rashut,&elal);
 				if(ok2==0)
 					printf("Can't add this airport since it already exists\n");
 				else if(ok2==-1)
