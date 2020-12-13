@@ -11,6 +11,4 @@ void printAirportManagerDetails(AirportManager* airportManager);
 void printFlightsOfAirlineBetweenAirports(Airline* airline);
 void freeAllMemory(AirportManager* airportManager, Airline* airline);
 
-
-
 #endif

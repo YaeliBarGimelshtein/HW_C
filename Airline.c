@@ -6,24 +6,6 @@
 #include "Flight.h"
 #include "Utils.h"
 
-void checkNumberOfFlights(Airline* airline)
-{
-	int temp=0;
-	int ok=0;
-	do{
-		printf("please enter the number of flights the airline has\n");
-		scanf("%d",&temp);
-		if(temp<0)
-			ok=0;
-		else
-		{
-			airline->numOfFlights=temp;
-			ok=1;
-		}
-	}
-	while(!ok);
-}
-
 
 void initAirline(Airline* airline)
 {
@@ -38,7 +20,7 @@ void initAirline(Airline* airline)
 
 void printAirline(const Airline* airline)
 {
-	printf("Airline: name= %s has %d flights\n" ,airline->name , airline->numOfFlights);
+	printf("Airline: name= %s , number of flights= %d \n" ,airline->name , airline->numOfFlights);
 	if(airline->numOfFlights!=0)
 	{
 		printf("The flights in this airline are:\n");
@@ -50,9 +32,6 @@ void printAirline(const Airline* airline)
 
 void freeAirline(Airline* airline)
 {
-	for (int i = 0; i < airline->numOfFlights; i++)
-		freeFlight(airline->allFlights[i]);
-
 	free(airline->allFlights);
 	free(airline->name);
 	free(airline);
@@ -60,16 +39,16 @@ void freeAirline(Airline* airline)
 
 int addFlight(Flight* flight, Airline* airline)
 {
-	if(airline->numOfFlights==0)
-	{
-		airline->numOfFlights+=1;
-		airline->allFlights = (Flight**)malloc(airline->numOfFlights*sizeof(Flight*));
-	}
-	else
-	{
+	//if(airline->numOfFlights==0)
+	//{
+		//airline->numOfFlights+=1;
+		//airline->allFlights = (Flight**)malloc(airline->numOfFlights*sizeof(Flight*));
+	//}
+	//else
+	//{
 		airline->numOfFlights+=1;
 		airline->allFlights = (Flight**)realloc(airline->allFlights, airline->numOfFlights*sizeof(Flight*));
-	}
+	//}
 
 	if(airline->allFlights==NULL)
 		return 0;

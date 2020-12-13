@@ -11,13 +11,11 @@ int checkDateFormat(char* date)
 	for (int i = 0; i <MAX_DATE-1 ; ++i)
 	{
 		if((i==2 && *date!='/' )|| (i==5 && *date!='/' ))
-		{
 			return 0;
-		}
+
 		else if(!(isdigit(*date)) && i!=2 &&i!=5)
-		{
 			return 0;
-		}
+
 		date++;
 	}
 	return 1;
@@ -83,6 +81,10 @@ int checkDateNumbers(char* dateStr, int* day, int* month, int* year)
 
 	getNumbersDateAsString(dayStr, monthStr, yearStr, dateStr); //puts into strings
 	makeNumbersDate(day, month, year, *dayStr, *monthStr,*yearStr); //puts into numbers
+
+	free(dayStr);
+	free(monthStr);
+	free(yearStr);
 
 	if(*day<0 || *month<0 || *year<1000|| *month>12|| *month>31|| *day>31)
 		return 0;
@@ -152,7 +154,7 @@ void initDate(Date* date)
 	int okStracture=0;
 	int okNumbers=0;
 	int okdayToMonth=0;
-	int time=1;
+	int firstTime=1;
 
 	char tempDate[MAX_DATE];
 	int day;
@@ -162,10 +164,10 @@ void initDate(Date* date)
 	do{
 		printf("enter flight date in format dd/mm/yyyy\n");
 
-		if(time==1)
+		if(firstTime)
 		{
 			getchar(); //whitespace
-			time++;
+			firstTime=0;
 		}
 
 		myGets(tempDate, MAX_DATE);

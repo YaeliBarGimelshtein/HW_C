@@ -9,7 +9,7 @@
 typedef enum{eJanuary, eFebruary, eMarch, eApril,eMay, eJune, eJuly, eAugust,
 	eSeptember, eOctober, eNovember, eDecember,eNumOfMonths} months;
 
-const char* allKinds[eNumOfMonths];
+//const char* allKinds[eNumOfMonths];
 
 typedef struct
 {

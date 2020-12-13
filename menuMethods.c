@@ -9,33 +9,38 @@
 #include "Flight.h"
 #include "Utils.h"
 
+Flight* flight;
+Airport* airport;
+char* IATAorigin;
+char* IATAdestination;
 
 int addFlightToAirline(Airline* airline, AirportManager* airportManager)
 {
-	Flight* flight;
 	flight= (Flight*)malloc(1*sizeof(flight));
-	initFlight(flight, airportManager);
-	int ok=addFlight(flight, airline);
-	return ok;
+	int okflight=initFlight(flight, airportManager);
+	if(okflight)
+	{
+		int ok=addFlight(flight, airline);
+		return ok;
+	}
+	return 0;
 }
 
 int addAirportToAirportManager(AirportManager* airportManager, Airline* airline)
 {
-	Airport* temp;
-	temp= (Airport*)malloc(1*sizeof(Airport));
-	initAirport(temp);
-	for (int i = 0; i < airportManager->numOfAitports; ++i) {
-		if(isAirportsSame(temp, &(airportManager->allAirports[i]))==1)
-			return 0;
-	}
-	int ok=addAirport(temp, airportManager);
-	if(ok)
+	airport= (Airport*)malloc(1*sizeof(Airport));
+	int okAirport=initAirport(airport);
+	if(okAirport)
 	{
-		return 1;
+		for (int i = 0; i < airportManager->numOfAitports; ++i)
+		{
+			if(isAirportsSame(airport, &(airportManager->allAirports[i]))==1)
+				return 0;
+		}
+		int ok=addAirport(airport, airportManager);
+		return ok;
 	}
-
-	else
-		return -1;
+	return -1;
 
 }
 void printAirlineDetalis(Airline* airline)
@@ -49,19 +54,21 @@ void printAirportManagerDetails(AirportManager* airportManager)
 
 void printFlightsOfAirlineBetweenAirports(Airline* airline)
 {
-	char* IATAorigin;
-	char* IATAdestination;
 	int counter=0;
 	IATAorigin= (char*)malloc(IATA_CODE*sizeof(char));
 	IATAdestination= (char*)malloc(IATA_CODE*sizeof(char));
 
-	initIATA(IATAorigin, IATAdestination);
+	initIATA(&IATAorigin, &IATAdestination);
 
 	counter=howManyFlightsInLineToAirline(airline, IATAorigin, IATAdestination);
-	printf("There are %d  flights in same line to the airline\n",counter);
+	printf("Number of flights in this line to airline: %d  \n",counter);
 }
 void freeAllMemory(AirportManager* airportManager, Airline* airline)
 {
 	freeAirline(airline);
 	freeAirportManager(airportManager);
+	free(flight);
+	free(airport);
+	free(IATAorigin);
+	free(IATAdestination);
 }

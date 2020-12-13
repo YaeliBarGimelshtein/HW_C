@@ -7,26 +7,32 @@
 
 int initAllAirports(AirportManager* airportManager)
 {
+	int ok=0;
 	airportManager->allAirports= (Airport*)malloc(airportManager->numOfAitports*sizeof(Airport));
-	for(int i=0; i<airportManager->numOfAitports; i++)
+	if(airportManager->allAirports!=NULL)
 	{
-		printf("Airport %d\n",i+1);
-		initAirport(&airportManager->allAirports[i]);
+		for(int i=0; i<airportManager->numOfAitports; i++)
+		{
+			printf("Airport %d\n",i+1);
+			ok=initAirport(&airportManager->allAirports[i]);
+			if(!ok)
+				return 0;
+		}
 	}
-	return 0;
+	return 1;
 }
 
 int initAirportManager(AirportManager* airportManager)
 {
 	printf("Please enter the number of airports \n");
 	scanf("%d", &airportManager->numOfAitports);
-	initAllAirports(airportManager);
-	return 0;
+	int ok=initAllAirports(airportManager);
+	return ok;
 }
 
 void printAirportManager(const AirportManager* airportManager)
 {
-	printf("There are %d airports: \n", airportManager->numOfAitports);
+	printf("Number of airports in managment= %d. \n", airportManager->numOfAitports);
 	if(airportManager->numOfAitports!=0)
 	{
 		for(int i=0; i<airportManager->numOfAitports; i++)
