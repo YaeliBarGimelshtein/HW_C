@@ -39,16 +39,16 @@ void freeAirline(Airline* airline)
 
 int addFlight(Flight* flight, Airline* airline)
 {
-	//if(airline->numOfFlights==0)
-	//{
-		//airline->numOfFlights+=1;
-		//airline->allFlights = (Flight**)malloc(airline->numOfFlights*sizeof(Flight*));
-	//}
-	//else
-	//{
+	if(airline->numOfFlights==0)
+	{
+		airline->numOfFlights+=1;
+		airline->allFlights = (Flight**)malloc(airline->numOfFlights*sizeof(Flight*));
+	}
+	else
+	{
 		airline->numOfFlights+=1;
 		airline->allFlights = (Flight**)realloc(airline->allFlights, airline->numOfFlights*sizeof(Flight*));
-	//}
+	}
 
 	if(airline->allFlights==NULL)
 		return 0;

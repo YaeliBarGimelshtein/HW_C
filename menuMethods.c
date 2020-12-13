@@ -9,18 +9,17 @@
 #include "Flight.h"
 #include "Utils.h"
 
-Flight* flight;
-Airport* airport;
-char* IATAorigin;
-char* IATAdestination;
 
 int addFlightToAirline(Airline* airline, AirportManager* airportManager)
 {
+	Flight* flight;
 	flight= (Flight*)malloc(1*sizeof(flight));
 	int okflight=initFlight(flight, airportManager);
 	if(okflight)
 	{
 		int ok=addFlight(flight, airline);
+		if(!ok)
+			free(flight);
 		return ok;
 	}
 	return 0;
@@ -28,6 +27,7 @@ int addFlightToAirline(Airline* airline, AirportManager* airportManager)
 
 int addAirportToAirportManager(AirportManager* airportManager, Airline* airline)
 {
+	Airport* airport;
 	airport= (Airport*)malloc(1*sizeof(Airport));
 	int okAirport=initAirport(airport);
 	if(okAirport)
@@ -38,6 +38,8 @@ int addAirportToAirportManager(AirportManager* airportManager, Airline* airline)
 				return 0;
 		}
 		int ok=addAirport(airport, airportManager);
+		if(!ok)
+			free(airport);
 		return ok;
 	}
 	return -1;
@@ -54,6 +56,8 @@ void printAirportManagerDetails(AirportManager* airportManager)
 
 void printFlightsOfAirlineBetweenAirports(Airline* airline)
 {
+	char* IATAorigin;
+	char* IATAdestination;
 	int counter=0;
 	IATAorigin= (char*)malloc(IATA_CODE*sizeof(char));
 	IATAdestination= (char*)malloc(IATA_CODE*sizeof(char));
@@ -62,13 +66,11 @@ void printFlightsOfAirlineBetweenAirports(Airline* airline)
 
 	counter=howManyFlightsInLineToAirline(airline, IATAorigin, IATAdestination);
 	printf("Number of flights in this line to airline: %d  \n",counter);
+	free(IATAdestination);
+	free(IATAorigin);
 }
 void freeAllMemory(AirportManager* airportManager, Airline* airline)
 {
 	freeAirline(airline);
 	freeAirportManager(airportManager);
-	free(flight);
-	free(airport);
-	free(IATAorigin);
-	free(IATAdestination);
 }
