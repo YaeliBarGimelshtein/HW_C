@@ -3,18 +3,8 @@
 #include "menuMethods.h"
 #include "AirportManager.h"
 #include "Airline.h"
+#include "Utils.h"
 
-void printMenu()
-{
-	printf("Please choose one of the following options:\n");
-	printf("press 1 to add a flight to the airline \n");
-	printf("press 2 to add an airport the the airport manager \n");
-	printf("press 3 to print details of airline \n");
-	printf("press 4 to print details of airport manager \n");
-	printf("press 5 to print the flights to airline between to airports \n");
-	printf("press 6 to exit the program \n");
-
-}
 
 int programStart(AirportManager* rashut,Airline* airlineCompany)
 {
@@ -47,7 +37,6 @@ int programStart(AirportManager* rashut,Airline* airlineCompany)
 
 int main()
 {
-
 	AirportManager* rashut;
 	Airline* airlineCompany;
 

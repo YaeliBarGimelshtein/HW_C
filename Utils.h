@@ -20,4 +20,7 @@ int checkTime(int time);
 //for getting numer of flights
 int checkIATAsame(char IATA1[IATA_CODE], char IATA2[IATA_CODE]);
 
+//for menu
+void printMenu();
+
 #endif

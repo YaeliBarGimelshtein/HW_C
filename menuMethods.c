@@ -13,7 +13,7 @@
 int addFlightToAirline(Airline* airline, AirportManager* airportManager)
 {
 	Flight* flight;
-	flight= (Flight*)malloc(1*sizeof(flight));
+	flight= (Flight*)malloc(1*sizeof(Flight));
 	int okflight=initFlight(flight, airportManager);
 	if(okflight)
 	{

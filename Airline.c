@@ -10,9 +10,12 @@
 void initAirline(Airline* airline)
 {
 	airline->name= (char*)malloc(MAX_NAME*sizeof(char));
-	printf("please enter the name of Airline\n");
-	getchar(); //removes white space
-	myGets(airline->name, MAX_NAME);
+	if(airline->name!=NULL)
+	{
+		printf("please enter the name of Airline\n");
+		getchar(); //removes white space
+		myGets(airline->name, MAX_NAME);
+	}
 	airline->numOfFlights=0;
 }
 
@@ -40,19 +43,16 @@ void freeAirline(Airline* airline)
 int addFlight(Flight* flight, Airline* airline)
 {
 	if(airline->numOfFlights==0)
-	{
-		airline->numOfFlights+=1;
-		airline->allFlights = (Flight**)malloc(airline->numOfFlights*sizeof(Flight*));
-	}
+		airline->allFlights = (Flight**)malloc((airline->numOfFlights+1)*sizeof(Flight*));
+
 	else
-	{
-		airline->numOfFlights+=1;
-		airline->allFlights = (Flight**)realloc(airline->allFlights, airline->numOfFlights*sizeof(Flight*));
-	}
+		airline->allFlights = (Flight**)realloc(airline->allFlights, (airline->numOfFlights+1)*sizeof(Flight*));
+
 
 	if(airline->allFlights==NULL)
 		return 0;
 
+	airline->numOfFlights+=1;
 	airline->allFlights[airline->numOfFlights-1]=flight;
 	return 1;
 }
@@ -63,10 +63,9 @@ int howManyFlightsInLineToAirline(Airline* airline, char IATAOrigin[IATA_CODE], 
 		return 0;
 	else
 	{
-		int counter=howManyFlightsInTheLine(airline->allFlights, IATAOrigin, IATADestenation);
+		int counter=howManyFlightsBetweenAirports(airline->allFlights, IATAOrigin, IATADestenation);
 		return counter;
 	}
-
 }
 
 

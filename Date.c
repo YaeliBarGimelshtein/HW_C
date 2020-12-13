@@ -172,7 +172,7 @@ void initDate(Date* date)
 
 		myGets(tempDate, MAX_DATE);
 
-		if(strlen(tempDate)==10)
+		if(strlen(tempDate)==MAX_DATE-1)
 		{
 			okStracture=checkDateFormat(tempDate);
 			getchar(); //whitespace

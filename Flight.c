@@ -6,6 +6,34 @@
 #include "Date.h"
 #include "AirportManager.h"
 
+void initIATA(char** IATAorigin, char** IATAdestination)
+{
+	int okDestination;
+	int okOrigin;
+	int same;
+	do{
+		printf("please enter the IATA of origin airport\n");
+		scanf("%s",*IATAorigin);
+		okOrigin=checkIATA(*IATAorigin);
+
+		printf("please enter the IATA of destination airport\n");
+		printf("Make sure it is not the same airport as origin\n");
+		scanf("%s",*IATAdestination);
+		okDestination=checkIATA(*IATAdestination);
+		if(!okDestination || !okOrigin)
+		{
+			printf("problem with syntax of IATA, try again\n");
+		}
+		else
+		{
+			same=checkIATAsame(*IATAdestination, *IATAorigin);
+			if(same)
+				printf("Same airports, try again\n");
+		}
+	}
+	while(!okDestination || !okOrigin|| same);
+}
+
 void initFlightAirports(Flight* flight, AirportManager* airportManager)
 {
 	Airport* temp;
@@ -28,6 +56,7 @@ void initTakeOffTime(Flight* flight)
 	}
 	while(!ok);
 }
+
 void initDateForFlight(Date* date)
 {
 	initDate(date);
@@ -74,12 +103,14 @@ int isTheSameFlight(Flight* flight, char IATAOrigin[IATA_CODE], char IATADestena
 	return 1;
 }
 
-int howManyFlightsInTheLine(Flight** flights,char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE])
+int howManyFlightsBetweenAirports(Flight** flights,char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE])
 {
 	int counter=0;
 	while(*flights)
 	{
 		if(isTheSameFlight(*flights, IATAOrigin, IATADestenation))
+			counter++;
+		if(isTheSameFlight(*flights, IATADestenation,IATAOrigin))
 			counter++;
 
 		flights++;

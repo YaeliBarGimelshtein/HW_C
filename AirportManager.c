@@ -53,11 +53,11 @@ void freeAirportManager(AirportManager* airportManager)
 
 int addAirport(Airport* airport, AirportManager* airportManager)
 {
-	airportManager->numOfAitports++;
-	airportManager->allAirports = (Airport*)realloc(airportManager->allAirports, airportManager->numOfAitports*sizeof(Airport));
+	airportManager->allAirports = (Airport*)realloc(airportManager->allAirports, (airportManager->numOfAitports+1)*sizeof(Airport));
 
 	if(airportManager->allAirports!=NULL)
 	{
+		airportManager->numOfAitports++;
 		airportManager->allAirports[(airportManager->numOfAitports)-1]=*airport;
 		return 1;
 	}

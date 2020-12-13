@@ -1,5 +1,5 @@
 main.o: ../main.c ../menuMethods.h ../AirportManager.h ../Airport.h \
- ../Airline.h ../Flight.h ../Date.h
+ ../Airline.h ../Flight.h ../Date.h ../Utils.h
 
 ../menuMethods.h:
 
@@ -12,3 +12,5 @@ main.o: ../main.c ../menuMethods.h ../AirportManager.h ../Airport.h \
 ../Flight.h:
 
 ../Date.h:
+
+../Utils.h:
