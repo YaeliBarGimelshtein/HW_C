@@ -6,18 +6,23 @@
 #include "Date.h"
 #include "AirportManager.h"
 
-void initIATA(char** IATAorigin, char** IATAdestination)
+void initIATA(char** IATAorigin, char** IATAdestination, int func)
 {
 	int okDestination;
 	int okOrigin;
 	int same;
 	do{
-		printf("please enter the IATA of origin airport\n");
+		if(func)
+			printf("please enter the IATA of first airport\n");
+		else
+			printf("please enter the IATA of origin airport\n");
 		scanf("%s",*IATAorigin);
 		okOrigin=checkIATA(*IATAorigin);
 
-		printf("please enter the IATA of destination airport\n");
-		printf("Make sure it is not the same airport as origin\n");
+		if(func)
+			printf("please enter the IATA of second airport\nMake sure it is not the same airport as origin\n");
+		else
+			printf("please enter the IATA of destination airport\nMake sure it is not the same airport as origin\n");
 		scanf("%s",*IATAdestination);
 		okDestination=checkIATA(*IATAdestination);
 		if(!okDestination || !okOrigin)
@@ -36,10 +41,11 @@ void initIATA(char** IATAorigin, char** IATAdestination)
 
 void initFlightAirports(Flight* flight, AirportManager* airportManager)
 {
+	int func=0;
 	Airport* temp;
 	Airport* temp2;
 	do{
-		initIATA(&flight->IATAorigin, &flight->IATAdestination);
+		initIATA(&flight->IATAorigin, &flight->IATAdestination, func);
 		temp=findAirport(flight->IATAdestination, airportManager);
 		temp2=findAirport(flight->IATAorigin, airportManager);
 	}
@@ -103,16 +109,16 @@ int isTheSameFlight(Flight* flight, char IATAOrigin[IATA_CODE], char IATADestena
 	return 1;
 }
 
-int howManyFlightsBetweenAirports(Flight** flights,char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE])
+int howManyFlightsBetweenAirports(Flight** flights,int numOfFlights,char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE])
 {
 	int counter=0;
-	while(*flights)
+
+	for (int i = 0; i < numOfFlights; ++i)
 	{
 		if(isTheSameFlight(*flights, IATAOrigin, IATADestenation))
 			counter++;
 		if(isTheSameFlight(*flights, IATADestenation,IATAOrigin))
 			counter++;
-
 		flights++;
 	}
 	return counter;

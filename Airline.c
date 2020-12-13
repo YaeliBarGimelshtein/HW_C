@@ -63,7 +63,7 @@ int howManyFlightsInLineToAirline(Airline* airline, char IATAOrigin[IATA_CODE], 
 		return 0;
 	else
 	{
-		int counter=howManyFlightsBetweenAirports(airline->allFlights, IATAOrigin, IATADestenation);
+		int counter=howManyFlightsBetweenAirports(airline->allFlights,airline->numOfFlights, IATAOrigin, IATADestenation);
 		return counter;
 	}
 }

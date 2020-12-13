@@ -14,7 +14,7 @@ typedef struct
 } Flight;
 
 //must:
-void initIATA(char** IATAorigin, char** IATAdestination);
+void initIATA(char** IATAorigin, char** IATAdestination, int func);
 void initFlightAirports(Flight* flight, AirportManager* airportManager);
 void initTakeOffTime(Flight* flight);
 void initDateForFlight(Date* date);
@@ -25,6 +25,6 @@ void freeFlight(Flight* flight);
 
 //extra:
 int isTheSameFlight(Flight* flight, char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE]);
-int howManyFlightsBetweenAirports(Flight** flights,char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE]);
+int howManyFlightsBetweenAirports(Flight** flights,int numOfFlights,char IATAOrigin[IATA_CODE], char IATADestenation[IATA_CODE]);
 
 #endif
